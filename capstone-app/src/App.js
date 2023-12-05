@@ -1,10 +1,15 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import { Routes, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LandingSection from './components/LandingSection';
 import Specials from './components/Specials';
 import ReviewSection from './components/ReviewSection';
 import About from './components/About';
+import Homepage from './Homepage';
+import Booking from './Booking';
+import Ordering from './Ordering';
+import Login from './Login';
 
 function App() {
   return (
@@ -15,10 +20,14 @@ function App() {
     <meta name='og:image' content='components'/>
       <main>
         <Header />
-        <LandingSection />
-        <Specials />
-        <ReviewSection />
-        <About />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about-me" element={<About />} />
+          <Route path="/menu" element={<Specials />} />
+          <Route path="/booking" element={<Booking />} />
+          <Route path="/order" element={<Ordering />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
         <Footer />
       </main>
     </ChakraProvider>

@@ -1,6 +1,6 @@
 import React from "react";
 import FullScreenSection from "./FullScreenSection";
-import { Card, CardHeader, CardBody, CardFooter, Avatar, Heading, VStack, HStack, Text, Box } from '@chakra-ui/react'
+import { Card, CardBody, Avatar, Heading, VStack, HStack, Text, Box } from '@chakra-ui/react'
 
 const ratingData = [
     {

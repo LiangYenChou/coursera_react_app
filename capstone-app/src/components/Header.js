@@ -1,5 +1,7 @@
 import React, {useEffect,useRef} from "react";
 import {Box, HStack, Image} from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
+
 const Header = () =>{
 
 
@@ -41,12 +43,12 @@ const Header = () =>{
                         <Image src={imageSrc.getImageSrc()} alt={imageSrc.title}/>
                         <nav>
                             <HStack spacing={8}>
-                                <a href="#home" onClick={ handleClick("home")}>Home</a>
-                                <a href="#about" onClick={ handleClick("about")}>About</a>
-                                <a href="#menu" onClick={ handleClick("menu")}>Menu</a>
-                                <a href="#reservation" onClick={ handleClick("reservation")}>Reservation</a>
-                                <a href="#order" onClick={ handleClick("order")}>Order Online</a>
-                                <a href="#login" onClick={ handleClick("login")}>Login</a>
+                                <Link to="/" className="nav-item">Home</Link>
+                                <Link to="/about-me" className="nav-item">About</Link>
+                                <Link to="/menu" className="nav-item">Menu</Link>
+                                <Link to="/booking" className="nav-item">Reservation</Link>
+                                <Link to="/ordering" className="nav-item">Order Online</Link>
+                                <Link to="/login" className="nav-item">Order Login</Link>
                             </HStack>
                         </nav>
                     </HStack>

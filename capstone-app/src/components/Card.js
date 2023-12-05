@@ -1,5 +1,5 @@
 import React from "react";
-import { VStack, HStack, Image, Heading, Text, Button, Box, Flex, Wrap } from "@chakra-ui/react";
+import { VStack, HStack, Image, Heading, Text, Button, Box } from "@chakra-ui/react";
 
 
 const Card = ({title, description, imageSrc,price}) => {

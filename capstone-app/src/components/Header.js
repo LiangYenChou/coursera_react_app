@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const Header = () =>{
 
 
-    const imageSrc = {
+    const logoImg = {
             title: "Logo",
-            getImageSrc: () => require("../assets/Logo .svg"),
+            imgSrc: "/assets/Logo .svg",
         }
 
     const handleClick = (anchor) => {
@@ -40,7 +40,7 @@ const Header = () =>{
                         justifyContent="space-between"
                         alignItems="center"
                     >
-                        <Image src={imageSrc.getImageSrc()} alt={imageSrc.title}/>
+                        <Image src={logoImg.imgSrc} alt={logoImg.title}/>
                         <nav>
                             <HStack spacing={8}>
                                 <Link to="/" className="nav-item">Home</Link>

@@ -1,6 +1,9 @@
+import React from "react";
+import BookingForm from "./components/BookingForm";
+
 const Booking = () => {
     return(
-        <h1>This is Booking Page</h1>
+        <BookingForm/>
     );
 }
 

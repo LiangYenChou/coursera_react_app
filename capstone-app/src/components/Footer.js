@@ -2,9 +2,9 @@ import {Box, Stack, VStack, Image} from "@chakra-ui/react";
 
 const Footer = () =>{
 
-    const imageSrc = {
+    const logoImg = {
         title: "Logo",
-        getImageSrc: () => require("../assets/Logo .svg"),
+        imgSrc: "assets/Logo .svg",
     }
 
     const handleClick = (anchor) => {
@@ -29,7 +29,7 @@ const Footer = () =>{
                         alignItems="stretch"
                         direction="row"
                     >
-                        <Image src={imageSrc.getImageSrc()} alt={imageSrc.title}/>
+                        <Image src={logoImg.imgSrc} alt={logoImg.title}/>
                         <VStack spacing={4} align='stretch'>
                             <label>Doormat Navigation</label>
                             <nav>

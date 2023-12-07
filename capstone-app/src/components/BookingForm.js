@@ -34,7 +34,7 @@ const BookingForm = () =>{
         onSubmit: (values) => {submit(submitAPI(values))},
         validationSchema: Yup.object().shape({
             date: Yup.date('Invalid Date').required('Required'),
-            time: Yup.string().required('Required'),
+            time: Yup.string().required('You need to select a available time slot'),
             number: Yup.number().default(2).moreThan(0,"Please input number greater than 0").lessThan(10, "Please input number no greater than 10").required('Required'),
             type: Yup.string().optional(),
         }),
@@ -71,9 +71,9 @@ const BookingForm = () =>{
                     Reserve a table
                 </Heading>
                 <Box p={6} rounded="md" w="100%">
-                    <form onSubmit={formik.handleSubmit}>
+                    <form onSubmit={formik.handleSubmit} aria-labbel="Form">
                         <VStack spacing={4}>
-                            <FormControl>
+                            <FormControl isInvalid={formik.errors.date && formik.touched.date}>
                                 <FormLabel>Choose Date</FormLabel>
                                 <Select id="date" name="date" {...formik.getFieldProps('date')} onClick={()=> dispatch({date: formik.values.date})} >
                                     <option value="2023-12-06">12/06/2023</option>
@@ -83,7 +83,8 @@ const BookingForm = () =>{
                                     <option value="2023-12-10">12/10/2023</option>
                                 </Select>
                             </FormControl>
-                            <FormControl>
+                            <FormErrorMessage>{ formik.errors.date}</FormErrorMessage>
+                            <FormControl isInvalid={formik.errors.time && formik.touched.time}>
                                 <FormLabel>Choose Time</FormLabel>
                                 <Select id="time" name="time" {...formik.getFieldProps('time')} >
                                     <option></option>
@@ -91,13 +92,14 @@ const BookingForm = () =>{
                                         <option value={time}>{time}</option>
                                     ))}
                                 </Select>
+                                <FormErrorMessage>{ formik.errors.time}</FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={formik.errors.number && formik.touched.number}>
                                 <FormLabel>Number of Guests</FormLabel>
                                 <Input id="number" name="number" {...formik.getFieldProps('number')}/>
                                 <FormErrorMessage>{ formik.errors.number}</FormErrorMessage>
                             </FormControl>
-                            <FormControl>
+                            <FormControl isInvalid={formik.errors.type && formik.touched.type}>
                                 <FormLabel htmlFor="type">Occasion</FormLabel>
                                 <Select id="type" name="type" {...formik.getFieldProps('type')}>
                                 <option value="birthday">Birthday</option>
@@ -105,9 +107,10 @@ const BookingForm = () =>{
                                 <option value="business">Business</option>
                                 <option value="leisure">Leisure</option>
                                 </Select>
+                                <FormErrorMessage>{ formik.errors.type}</FormErrorMessage>
                             </FormControl>
 
-                            <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading}>Submit</Button>
+                            <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading} aria-labbel="On Click">Submit</Button>
                         </VStack>
                     </form>
                 </Box>

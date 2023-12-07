@@ -1,38 +1,37 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useFormik} from "formik";
 import * as Yup from 'yup';
 
 import { Box, Button, FormLabel, Heading, Input, VStack, Select, FormControl, FormErrorMessage,} from "@chakra-ui/react";
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
-import {useAlertContext} from "../context/alertContext"
-
+import { fetchAPI, submitAPI } from "../context/mockAPI";
+import { useAlertContext } from "../context/alertContext";
+import { useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 
-const availableDateandTime = {
-    "12-05-2023": ["17:00","17:30","18:00","18:30","19:00","19:30","20:00"],
-    "12-06-2023": ["11:00","11:30","12:00","12:30","13:00","13:30","14:00"],
-};
 
 const updateTimes = (state, action) =>{
-    if (action.type === 'UPDATE') return( {availableTimes: ["11:00","11:30","12:00","12:30","13:00","13:30","14:00"]} );
-    return state;
+    return {date: action.date, availableTimes: fetchAPI(action.date)};
 }
 const BookingForm = () =>{
 
-    const initialState = {availableTimes: ["17:00","17:30","18:00","18:30","19:00","19:30","20:00"]};
+    const initialState = {date: "2023-12-06", availableTimes: fetchAPI("2023-12-06")}
     const [state, dispatch] = useReducer(updateTimes, initialState);
 
     const { isLoading, response, submit } = useSubmit();
-    const {onOpen} = useAlertContext();
+    const navigate = useNavigate();
+    //const {onOpen} = useAlertContext();
+
+
     const formik = useFormik({
         initialValues: {
-            date: "",
+            date: initialState.date,
             time: "",
             number: 2,
-            type: "",
+            type: "Birthday",
         },
-        onSubmit: (values) => {submit("https://example.com/contactme", values)},
+        onSubmit: (values) => {submit(submitAPI(values))},
         validationSchema: Yup.object().shape({
             date: Yup.date('Invalid Date').required('Required'),
             time: Yup.string().required('Required'),
@@ -40,15 +39,26 @@ const BookingForm = () =>{
             type: Yup.string().optional(),
         }),
     });
+    console.log(formik.values)
+
+
+    // useEffect(()=>{
+    //     if (response) {
+    //         onOpen(response.type, response.message);
+    //         if (response.type === 'success'){
+    //             formik.resetForm();
+    //         }
+    //     }
+    // },[response]);
 
     useEffect(()=>{
-        if (response) {
-            onOpen(response.type, response.message);
-            if (response.type === 'success'){
-                formik.resetForm();
-            }
+
+        if(response){
+            navigate("/booking/confirmed");
         }
     },[response]);
+
+
     return(
         <FullScreenSection
         isDarkBackground
@@ -65,14 +75,18 @@ const BookingForm = () =>{
                         <VStack spacing={4}>
                             <FormControl>
                                 <FormLabel>Choose Date</FormLabel>
-                                <Select id="date" name="date" onClickCapture={()=> dispatch({type: "UPDATE"})} {...formik.getFieldProps('date')} >
-                                    <option value="12-05-2023">12/05/2023</option>
-                                    <option value="12-06-2023">12/06/2023</option>
+                                <Select id="date" name="date" {...formik.getFieldProps('date')} onClick={()=> dispatch({date: formik.values.date})} >
+                                    <option value="2023-12-06">12/06/2023</option>
+                                    <option value="2023-12-07">12/07/2023</option>
+                                    <option value="2023-12-08">12/08/2023</option>
+                                    <option value="2023-12-09">12/09/2023</option>
+                                    <option value="2023-12-10">12/10/2023</option>
                                 </Select>
                             </FormControl>
                             <FormControl>
-                                <FormLabel>Choose Time {state.availableTimes}</FormLabel>
-                                <Select id="time" name="time" {...formik.getFieldProps('type')}>
+                                <FormLabel>Choose Time</FormLabel>
+                                <Select id="time" name="time" {...formik.getFieldProps('time')} >
+                                    <option></option>
                                     {state.availableTimes.map((time)=>(
                                         <option value={time}>{time}</option>
                                     ))}

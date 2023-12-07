@@ -12,6 +12,8 @@ import Login from './Login';
 
 import { AlertProvider } from "./context/alertContext";
 import Alert from "./components/Alert";
+import { Helmet } from 'react-helmet';
+import ConfirmedBooking from './components/ConfirmedBooking';
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/ordering" element={<Ordering />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/booking/confirmed" element={<ConfirmedBooking />} />
         </Routes>
         <Footer />
         <Alert/>

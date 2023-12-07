@@ -6,7 +6,6 @@ import { Box, Button, FormLabel, Heading, Input, VStack, Select, FormControl, Fo
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import { fetchAPI, submitAPI } from "../context/mockAPI";
-import { useAlertContext } from "../context/alertContext";
 import { useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 
@@ -21,7 +20,7 @@ const BookingForm = () =>{
 
     const { isLoading, response, submit } = useSubmit();
     const navigate = useNavigate();
-    //const {onOpen} = useAlertContext();
+    
 
 
     const formik = useFormik({
@@ -40,16 +39,6 @@ const BookingForm = () =>{
         }),
     });
     console.log(formik.values)
-
-
-    // useEffect(()=>{
-    //     if (response) {
-    //         onOpen(response.type, response.message);
-    //         if (response.type === 'success'){
-    //             formik.resetForm();
-    //         }
-    //     }
-    // },[response]);
 
     useEffect(()=>{
 

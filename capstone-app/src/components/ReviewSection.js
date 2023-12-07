@@ -36,7 +36,7 @@ const ReviewSection = () => {
             alignItems="center"
             spacing={8}
         >
-            <VStack spacing={8}>
+            <VStack spacing={8} mt='20vh' mb='20vh'>
             <Heading as="h2" mt={12}>Testimonials</Heading>
             <Box
                 display="grid"

@@ -21,7 +21,7 @@ const About = () =>{
             isDarkBackground
             backgroundColor="#2A4365"
         >
-            <HStack spacing={8} alignItems='stectch' mt='24px'>
+            <HStack spacing={8} alignItems='stectch' mt='20vh' mb='20vh'>
                 <VStack mb={ 16} spacing={ 4} alignItems="stretch" maxW="30vw">
                     <Heading as="h1" size="2xl">{storename}</Heading>
                     <Heading as="h2" size="md" mb={12}>{location}</Heading>

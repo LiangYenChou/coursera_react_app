@@ -35,7 +35,7 @@ const Specials = () => {
             alignItems="flex-start"
             spacing={8}
         >
-            <VStack spacing={8}>
+            <VStack spacing={8} mt='20vh' mb='20vh'>
                 <HStack spacing="60vw"  alignItems="stretch">
                     <Heading as="h1" id="projects-section">
                         Specials
